@@ -96,5 +96,28 @@ const deleteTodo = asyncHandler(async (req, res) => {
         )
     )
 })
-export { addTodo, deleteTodo, getSpecificTodo, getTodos, updateTodo };
+
+const markComplete = asyncHandler(async (req, res) => {
+    await Todo.findByIdAndUpdate(
+        req.params?.id,
+        {
+            $set: {
+                status:"Done"
+            }
+        },
+        {
+            new:true
+        }
+    )
+
+    return res.status(200)
+        .json(
+            new ApiResponse(
+                200,
+                {},
+                "Todo completed"
+        )
+    )
+})
+export { addTodo, deleteTodo, getSpecificTodo, getTodos, markComplete, updateTodo };
 
