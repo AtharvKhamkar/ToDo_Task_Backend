@@ -24,7 +24,7 @@ const addTodo = asyncHandler(async (req, res) => {
 
 const getTodos = asyncHandler(async (req, res) => {
     
-    const allTodos = await Todo.find({});
+    const allTodos = await Todo.find({}).sort({createdAt:-1});
 
     return res.status(200)
         .json(
